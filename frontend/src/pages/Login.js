@@ -12,7 +12,7 @@ const Login = () => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5001/api/v1/auth/login', formData);
+      const res = await axios.post('https://auth-dashboard-assignment.onrender.com/api/v1/auth/login', formData);
       localStorage.setItem('token', res.data.token);
       toast.success('Login Successful!'); // Success toast
       navigate('/dashboard');

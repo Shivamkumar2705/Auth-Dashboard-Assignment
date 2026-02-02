@@ -32,7 +32,7 @@ const Dashboard = () => {
 
   const fetchUser = async () => {
     try { 
-      const res = await axios.get('http://localhost:5001/api/v1/me', config); 
+      const res = await axios.get('https://auth-dashboard-assignment.onrender.com/api/v1/me', config); 
       setUser(res.data);
       setProfileData({
         name: res.data.name || '',
@@ -49,7 +49,7 @@ const Dashboard = () => {
   const updateProfile = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('http://localhost:5001/api/v1/me', profileData, config);
+      const res = await axios.put('https://auth-dashboard-assignment.onrender.com/api/v1/me', profileData, config);
       setUser(res.data); 
       setIsEditing(false); 
       toast.success("Profile updated successfully!"); // Toast added
@@ -60,14 +60,14 @@ const Dashboard = () => {
   };
 
   const fetchTasks = async () => {
-    try { const res = await axios.get('http://localhost:5001/api/v1/tasks', config); setTasks(res.data); }
+    try { const res = await axios.get('https://auth-dashboard-assignment.onrender.com/api/v1/tasks', config); setTasks(res.data); }
     catch (err) { console.error(err); }
   };
 
   const addTask = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5001/api/v1/tasks', newTask, config);
+      const res = await axios.post('https://auth-dashboard-assignment.onrender.com/api/v1/tasks', newTask, config);
       setTasks([res.data, ...tasks]);
       setNewTask({ title: '', description: '' });
       toast.success("Task added!"); // Toast added
@@ -79,7 +79,7 @@ const Dashboard = () => {
 
   const deleteTask = async (id) => {
     try {
-      await axios.delete(`http://localhost:5001/api/v1/tasks/${id}`, config);
+      await axios.delete(`https://auth-dashboard-assignment.onrender.com/api/v1/tasks/${id}`, config);
       setTasks(tasks.filter(task => task._id !== id));
       toast.success("Task deleted"); // Toast added
     } catch (err) { 
@@ -91,7 +91,7 @@ const Dashboard = () => {
   const toggleStatus = async (task) => {
     try {
         const newStatus = task.status === 'Pending' ? 'Completed' : 'Pending';
-        const res = await axios.put(`http://localhost:5001/api/v1/tasks/${task._id}`, { ...task, status: newStatus }, config);
+        const res = await axios.put(`https://auth-dashboard-assignment.onrender.com/api/v1/tasks/${task._id}`, { ...task, status: newStatus }, config);
         setTasks(tasks.map(t => t._id === task._id ? res.data : t));
         toast.success(newStatus === 'Completed' ? "Task Completed!" : "Task Reopened"); // Toast added
     } catch (err) { 
